@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<title>WarnerMusic - REC 118 Artist Concerts Mapper</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!--Font Awesome-->
+		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+		<!--Bulma-->
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css' rel='stylesheet' />
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css.map' rel='stylesheet' />
+		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css' rel='stylesheet' />
+		<!--DatePicker-->
+		<link rel="stylesheet" href="./css/daterangepicker.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="./js/moment.min.js"></script>
+		<script type="text/javascript" src="./js/jquery.daterangepicker.min.js"></script>
+		<!--MapBox-->
+		<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
+		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+		<style>
+			body { margin:0; padding:0; }
+			#map { position:absolute; top:0; bottom:0; width:100%; }
+		</style>
+	</head>
+	<body>
+		<section class="section">
+			<!-- Title -->
+			<div class="container">
+				<h1 class="title">REC 118 - Artist Concerts Mapper</h1>
+				<h2 class="subtitle">
+					A simple use of <strong>MapBox</strong> & <strong>SongKick</strong> A.P.I.
+				</h2>
+			</div><br>
+			<!-- Search Imput -->
+			<div class="container">
+				<nav class="level">
+					<div class="level-left">
+						<div class="level-item">
+							<div class="field has-addons">
+								<p class="control">
+									<div class="select">
+										<select id="artistPicker" onchange="location.reload()">
+											<option value="">--Choose an Artist--</option>
+											<option value="159555-soprano">SOPRANO</option>
+											<option value="9254109-ninho">NINHO</option>
+											<option value="9733554-aya_nakamura">AYA NAKAMURA</option>
+											<option value="5497283-sadek">SADEK</option>
+											<option value="9667024-hornet_la_frappe">HORNET LA FRAPPE</option>
+											<option value="172340-sch">SCH</option>
+											<option value="1813772-hamza">HAMZA</option>
+											<option value="9685774-kpoint">KPOINT</option>
+											<option value="9775139-da-uzi">DA UZI</option>
+										</select>
+									</div>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="level-right">
+						<input id="datePickerByRange" class="input" placeholder="select a time range...">
+						<p class="control">
+							<button class="button" onclick="getData()">
+								Search
+							</button>
+						</p>
+					</div>
+				</nav>
+			</div><br>
+			<!-- map -->
+			<div class="container">
+				<div style="height: 500px; padding-left: 0px;">
+					<div id='map'></div>
+				</div>
+			</div>
+		</section>
+		<footer class="footer">
+			<div class="content has-text-centered">
+				<p>
+					<strong>Design</strong> by <a href="https://www.linkedin.com/in/st%C3%A9phane-lejeune/" target="_blank">TheYoungStéph</a>.
+				</p>
+			</div>
+		</footer>
+	</body>
+	<script type="text/javascript" src="./js/main.js"></script>
+</html>
