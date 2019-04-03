@@ -1,3 +1,3 @@
 REC-118---Artist-Concerts-Mapper
 
-npm install ;)
+Just run it on local server.
