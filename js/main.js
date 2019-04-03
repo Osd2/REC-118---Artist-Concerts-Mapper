@@ -22,16 +22,14 @@ function getData(){
     var artistId = $('#artistPicker').val();
     var timeRange = $('#datePickerByRange').val();
     if (artistId || timeRange != null) {
-        console.log(artistId);
-        console.log(timeRange);
         var url = '//api.songkick.com/api/3.0/artists/' + artistId.substring(0, artistId.indexOf('-')) + '/calendar.json?apikey=io09K9l3ebJxmxe2&jsoncallback=?';
-        getSongKickData(url, timeRange.substring(0, timeRange.indexOf(' to')), timeRange.substring(timeRange.lastIndexOf(' ') + 1, timeRange.length));
+        songKickDataToMappBoxLayer(url, timeRange.substring(0, timeRange.indexOf(' to')), timeRange.substring(timeRange.lastIndexOf(' ') + 1, timeRange.length));
     } else {
         alert("Please Choose an artist and select a time range.");
     }
 };
 
-function getSongKickData(url, startDate, endDate) {
+function songKickDataToMappBoxLayer(url, startDate, endDate) {
     var iterator = 0
     var noEvent = false
     if (artistEvent != undefined) {
@@ -62,12 +60,10 @@ function getSongKickData(url, startDate, endDate) {
             noEvent = true
             alert('Sorry, your artist has no concert scheduled !')
         }
-        console.log(iterator)
         if (iterator === 0 && noEvent === false)
             alert('Sorry, your artist has no concert scheduled during the time select !')
         map.fire('click', { lngLat: [2.3518217564128463, 47.867515761500414] })
     });
-    console.log('GeoJson data Updated')
 };
 
 function geoJsonMaker(obj) {
