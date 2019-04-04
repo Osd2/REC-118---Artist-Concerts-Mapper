@@ -1,3 +1,4 @@
+// Init elements  ------------------------------
 $('#datePickerByRange').dateRangePicker({
     autoClose: false,
 	format: 'YYYY-MM-DD',
@@ -17,11 +18,15 @@ var featuresContainer = {
     type: 'FeatureCollection',
     features: []
 };
+// ----------------------------------------------
 
+// Logic  ---------------------------------------
+// Selection Data reception
 function getData(){
     var artistId = $('#artistPicker').val();
     var timeRange = $('#datePickerByRange').val();
     if (artistId || timeRange != null) {
+        // songKick url api construction
         var url = '//api.songkick.com/api/3.0/artists/' + artistId.substring(0, artistId.indexOf('-')) + '/calendar.json?apikey=io09K9l3ebJxmxe2&jsoncallback=?';
         songKickDataToMappBoxLayer(url, timeRange.substring(0, timeRange.indexOf(' to')), timeRange.substring(timeRange.lastIndexOf(' ') + 1, timeRange.length));
     } else {
@@ -29,7 +34,9 @@ function getData(){
     }
 };
 
+// get the return JSON of songkick api && store this data into a Mapbox layer && also the MAIN Methode
 function songKickDataToMappBoxLayer(url, startDate, endDate) {
+    // clear elements content
     var iterator = 0
     var noEvent = false
     if (artistEvent != undefined) {
@@ -41,18 +48,27 @@ function songKickDataToMappBoxLayer(url, startDate, endDate) {
         console.log('featuresContainer.isEmpty')
     }
     $.getJSON(url, function(data) {
-        console.log(data)
+        // return of songkick api.
+        // console.log(data)
+
+        // if we have data.resultsPage.totalEntries = 0 -> 'Sorry, your artist has no concert scheduled !'
         if (data.resultsPage.totalEntries != 0) {
             var events = data.resultsPage.results.event;
             events.forEach(function(item, index, array) {
+                // store only the necessary of songkick JSON into custom js object artistEvent.
                 artistEvent = new Object();
                 artistEvent.name = array[index].displayName;
                 artistEvent.lat = array[index].location.lat;
                 artistEvent.lng = array[index].location.lng;
                 artistEvent.startDate = array[index].start.date;
                 artistEvent.uri = array[index].uri;
+                // get only concerts into the time range selection.
                 if (moment(artistEvent.startDate).isBetween(startDate, endDate)) {
+                    // geoJsonMaker create a JSONstructure like MapBox layer
+                    // with events of artist in features 
+                    // todo they Marker of the MAP (!.!)
                     geoJsonMaker(artistEvent);
+                    // iterator = the number of concert.
                     iterator++
                 }
             });
@@ -60,8 +76,10 @@ function songKickDataToMappBoxLayer(url, startDate, endDate) {
             noEvent = true
             alert('Sorry, your artist has no concert scheduled !')
         }
+        // if iterator = 0 -> 'Sorry, your artist has no concert scheduled during the time select !'
         if (iterator === 0 && noEvent === false)
             alert('Sorry, your artist has no concert scheduled during the time select !')
+        // this Map.fire() simulate a click on the map for update this one with the new layer =)
         map.fire('click', { lngLat: [2.3518217564128463, 47.867515761500414] })
     });
 };
@@ -81,6 +99,7 @@ function geoJsonMaker(obj) {
     featuresContainer.features.push(feature)
 }
 
+// Init of Mapbox Map with some checking for increase the robusteness
 var layerFilled = false
 map.on('click', function () {
     if (featuresContainer.features.length != 0) {
@@ -129,3 +148,4 @@ map.on('click', function () {
         map.getCanvas().style.cursor = '';
     });
 });
+// ---------------------------------------------

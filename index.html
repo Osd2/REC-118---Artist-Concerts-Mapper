@@ -4,17 +4,17 @@
 		<meta charset='utf-8' />
 		<title>WarnerMusic - REC 118 Artist Concerts Mapper</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<!--Font Awesome-->
+		<!--Font Awesome(Icons)-->
 		<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-		<!--Bulma-->
+		<!--Bulma(Responsivness Frontend)-->
 		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css' rel='stylesheet' />
 		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css.map' rel='stylesheet' />
 		<link href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css' rel='stylesheet' />
-		<!--DatePicker-->
+		<!--DateRangePicker(Pretty & simple dateRangePicker) - Moment(for deal with the time) - JQuery-->
 		<link rel="stylesheet" href="./css/daterangepicker.min.css">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 		<script type="text/javascript" src="./js/moment.min.js"></script>
 		<script type="text/javascript" src="./js/jquery.daterangepicker.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 		<!--MapBox-->
 		<link href='https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css' rel='stylesheet' />
 		<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
@@ -25,20 +25,21 @@
 	</head>
 	<body>
 		<section class="section">
-			<!-- Title -->
+			<!-- Header Title -->
 			<div class="container">
 				<h1 class="title">REC 118 - Artist Concerts Mapper</h1>
 				<h2 class="subtitle">
 					A simple use of <strong>MapBox</strong> & <strong>SongKick</strong> A.P.I.
 				</h2>
 			</div><br>
-			<!-- Search Imput -->
+			<!-- Search Input -->
 			<div class="container">
 				<nav class="level">
 					<div class="level-left">
 						<div class="level-item">
 							<div class="field has-addons">
 								<p class="control">
+									<!--Artist Selection-->
 									<div class="select">
 										<select id="artistPicker" onchange="location.reload()">
 											<option value="">--Choose an Artist--</option>
@@ -58,8 +59,10 @@
 						</div>
 					</div>
 					<div class="level-right">
+						<!--Date Selection-->
 						<input id="datePickerByRange" class="input" placeholder="select a time range...">
 						<p class="control">
+							<!--Seach Button-->
 							<button class="button" onclick="getData()">
 								Search
 							</button>
@@ -67,13 +70,14 @@
 					</div>
 				</nav>
 			</div><br>
-			<!-- map -->
+			<!-- Map -->
 			<div class="container">
 				<div style="height: 500px; padding-left: 0px;">
 					<div id='map'></div>
 				</div>
 			</div>
 		</section>
+		<!-- Footer -->
 		<footer class="footer">
 			<div class="content has-text-centered">
 				<p>
@@ -82,5 +86,6 @@
 			</div>
 		</footer>
 	</body>
+	<!-- Script -->
 	<script type="text/javascript" src="./js/main.js"></script>
 </html>
