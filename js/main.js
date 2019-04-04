@@ -5,7 +5,6 @@ $('#datePickerByRange').dateRangePicker({
     separator: ' to ',
     startDate: moment(),
 });
-
 mapboxgl.accessToken = 'pk.eyJ1Ijoib3NkZSIsImEiOiJjanR1Y3p5MDkxMnd2NDNtbW96OGVjY2lnIn0.qvu1YnUJmDe-5Umm8gVR5A';
 var map = new mapboxgl.Map({
     container: 'map',
@@ -41,11 +40,11 @@ function songKickDataToMappBoxLayer(url, startDate, endDate) {
     var noEvent = false
     if (artistEvent != undefined) {
         artistEvent.length = 0
-        console.log('artistEvent.isEmpty')
+        //console.log('artistEvent.isEmpty')
     }
     if (featuresContainer.features.length != undefined) {
         featuresContainer.features.length = 0
-        console.log('featuresContainer.isEmpty')
+        //console.log('featuresContainer.isEmpty')
     }
     $.getJSON(url, function(data) {
         // return of songkick api.
@@ -104,7 +103,7 @@ var layerFilled = false
 map.on('click', function () {
     if (featuresContainer.features.length != 0) {
         if (layerFilled != true) {
-            console.log(featuresContainer)
+            // console.log(featuresContainer)
             map.addSource('features', { type: 'geojson', data: featuresContainer }); 
             map.addLayer({
                 "id": "features",
